@@ -1,0 +1,56 @@
+<!--
+  Custom Wazuh rules for the SOC home lab.
+  Install: /var/ossec/etc/rules/local_rules.xml on the manager.
+  ALWAYS validate with /var/ossec/bin/wazuh-logtest before restarting the manager.
+  Custom rule IDs must be in the 100000-120000 range.
+-->
+
+<group name="local,sshd,authentication_failures,">
+
+  <!-- SSH brute force: 5+ failed logins from the same IP within 2 minutes -->
+  <rule id="100100" level="10" frequency="5" timeframe="120">
+    <if_matched_sid>5760</if_matched_sid>
+    <same_source_ip />
+    <description>Lab: possible SSH brute force - 5+ failed logins from $(srcip) in 2 minutes</description>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+    <group>pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+
+  <!-- Successful SSH login from an IP that was just brute forcing -->
+  <rule id="100101" level="14" frequency="2" timeframe="300">
+    <if_matched_sid>100100</if_matched_sid>
+    <if_sid>5715</if_sid>
+    <same_source_ip />
+    <description>Lab: successful SSH login from $(srcip) after brute-force activity - possible compromise</description>
+    <mitre>
+      <id>T1110.001</id>
+      <id>T1078</id>
+    </mitre>
+  </rule>
+
+</group>
+
+<group name="local,windows,authentication_failures,">
+
+  <!-- RDP / network logon brute force on Windows (4625 decoded as rule 60122) -->
+  <rule id="100110" level="10" frequency="8" timeframe="120">
+    <if_matched_sid>60122</if_matched_sid>
+    <same_field>win.eventdata.ipAddress</same_field>
+    <description>Lab: possible Windows brute force - 8+ failed logons from $(win.eventdata.ipAddress) in 2 minutes</description>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+
+  <!-- New local user created (4720) -->
+  <rule id="100120" level="8">
+    <if_sid>60109</if_sid>
+    <description>Lab: new local user account created - $(win.eventdata.targetUserName)</description>
+    <mitre>
+      <id>T1136.001</id>
+    </mitre>
+  </rule>
+
+</group>
