@@ -25,7 +25,7 @@ flowchart LR
 | [`docs/02-wazuh-setup.md`](docs/02-wazuh-setup.md) | Installing the Wazuh manager and agents, enabling the right Windows logs |
 | [`docs/03-nmap-methodology.md`](docs/03-nmap-methodology.md) | How I scan and enumerate lab hosts, and how I write up findings |
 | [`configs/local_rules.xml`](configs/local_rules.xml) | Custom Wazuh rules (SSH brute force, fail-then-succeed, RDP brute force), mapped to MITRE ATT&CK |
-| [`findings/`](findings/) | Investigation and scan write-ups, one per exercise |
+| [`findings/`](findings/) | Exercise plans and write-ups, one per exercise (in progress) |
 | [`screenshots/`](screenshots/) | Dashboard and alert evidence |
 
 ## Skills practised
@@ -40,8 +40,8 @@ flowchart LR
 
 | # | Exercise | ATT&CK | Write-up |
 |---|---|---|---|
-| 1 | Nmap discovery and service enumeration of lab hosts | T1046 | [findings/01-nmap-enumeration.md](findings/01-nmap-enumeration.md) |
-| 2 | SSH / RDP brute force from Kali, detected in Wazuh | T1110 | [findings/02-brute-force-detection.md](findings/02-brute-force-detection.md) |
+| 1 | Nmap discovery and service enumeration of lab hosts | T1046 | [in progress](findings/01-nmap-enumeration.md) |
+| 2 | SSH / RDP brute force from Kali, detected in Wazuh | T1110 | [in progress](findings/02-brute-force-detection.md) |
 | 3 | New local admin account created on Windows | T1136.001 | *planned* |
 | 4 | Suspicious PowerShell execution (Sysmon) | T1059.001 | *planned* |
 
