@@ -55,8 +55,3 @@ Copy [`../configs/local_rules.xml`](../configs/local_rules.xml) into `/var/ossec
 sudo /var/ossec/bin/wazuh-logtest     # paste a sample log line to see which rule fires
 sudo systemctl restart wazuh-manager
 ```
-
-## Troubleshooting notes
-
-<!-- ✏️ Add problems you actually hit and how you fixed them. Interviewers love these. -->
-- 

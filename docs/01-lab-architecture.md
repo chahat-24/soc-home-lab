@@ -9,22 +9,11 @@
 | Domain/server | Windows Server | Monitored server (Wazuh agent) | 2 vCPU · 4 GB RAM |
 | Workstation | Windows 10 | Monitored endpoint (Wazuh agent) | 2 vCPU · 4 GB RAM |
 
-<!-- ✏️ Update the table with your exact versions and resources -->
-
 ## Networking
 
 - All VMs sit on a VirtualBox **NAT Network** (or Host-only network) so they can reach each other but **not** the home LAN.
-- Lab subnet: `10.0.2.0/24` <!-- ✏️ change to your actual subnet -->
+- Lab subnet: a private range such as `10.0.2.0/24` (exact addresses omitted here).
 - The Wazuh manager has a static IP so agents can always reach it on **TCP 1514** (events) and **1515** (enrolment); the dashboard is on **443**.
-
-| Host | IP |
-|---|---|
-| Wazuh manager | `10.0.2.x` |
-| Kali | `10.0.2.x` |
-| Windows Server | `10.0.2.x` |
-| Windows 10 | `10.0.2.x` |
-
-<!-- ✏️ fill in your IPs -->
 
 ## Design decisions
 
